@@ -1,162 +1,36 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Country Information Finder</title>
-    
-        body {
-            font-family: Arial, sans-serif;
-            padding: 30px;
-            background: #f2f2f2;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px gray;
-        }
-        input, button {
-            padding: 10px;
-            margin: 10px 0;
-            width: 100%;
-            font-size: 18px;
-        }
-        button {
-            background: blue;
-            color: white;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-        }
-        #result img {
-            width: 150px;
-            margin-top: 10px;
-            border: 1px solid #ccc;
-        }
-        .title {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌍 Country Information Finder</title>
 
-// script.js
-const countries = {
-  Kenya: { currency: "KES", continent: "Africa", population: "55M", flag: "🇰🇪" },
-  "South Sudan": { currency: "SSP", continent: "Africa", population: "11M", flag: "🇸🇸" },
-  USA: { currency: "USD", continent: "North America", population: "331M", flag: "🇺🇸" }
-};
-
-function searchCountry() {
-  const name = document.getElementById("countryInput").value;
-  const info = countries[name];
-  if(info){
-    document.getElementById("result").innerHTML = `
-      <p>Currency: ${info.currency}</p>
-      <p>Continent: ${info.continent}</p>
-      <p>Population: ${info.population}</p>
-      <p>Flag: ${info.flag}</p>
-    `;
-  } else {
-    document.getElementById("result").innerHTML = "<p>Country not found!</p>";
-  }
-}
-
-function toggleDark() {
-  document.body.classList.toggle("dark-mode");
-}
+    <!-- Link external CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="container">
     <div class="title">🌍 Country Information Finder</div>
 
-    <input type="text" id="countryInput" placeholder="Enter a country name...">
+    <input type="text" id="countryInput" placeholder="Enter a country name..." list="countriesList">
+    <datalist id="countriesList">
+        <option value="Kenya">
+        <option value="South Sudan">
+        <option value="USA">
+        <option value="Canada">
+        <option value="India">
+        <option value="France">
+        <option value="Germany">
+        <!-- Add more countries as needed -->
+    </datalist>
+
     <button onclick="searchCountry()">Search</button>
+    <button onclick="toggleDark()">Toggle Dark Mode</button>
 
     <div id="result"></div>
 </div>
 
-
-async function searchCountry() {
-    const country = document.getElementById("countryInput").value.trim();
-
-    if (country === "") {
-        alert("Please type a country name.");
-        return;
-    }
-
-    const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = "<p>Loading...</p>";
-
-    try {
-        // REST Countries API
-        const res = await fetch(`https://restcountries.com/v3.1/name/${country}`);
-        const data = await res.json();
-
-        if (!Array.isArray(data)) {
-            resultDiv.innerHTML = "<p>Country not found.</p>";
-            return;
-        }
-
-        const c = data[0];
-
-        // Extract fields
-        const name = c.name.common;
-        const capital = c.capital ? c.capital[0] : "Not available";
-        const population = c.population.toLocaleString();
-        const region = c.region;
-        const flag = c.flags.png;
-        const currency = c.currencies ? Object.values(c.currencies)[0].name : "Not available";
-        const languages = c.languages ? Object.values(c.languages).join(", ") : "Not available";
-
-        // Display result (NO PRESIDENT / LEADER)
-        resultDiv.innerHTML = `
-            <h2>${name}</h2>
-            <img src="${flag}">
-            <p><strong>Capital:</strong> ${capital}</p>
-            <p><strong>Population:</strong> ${population}</p>
-            <p><strong>Continent:</strong> ${region}</p>
-            <p><strong>Currency:</strong> ${currency}</p>
-            <p><strong>Languages:</strong> ${languages}</p>
-        `;
-
-    } catch (error) {
-        resultDiv.innerHTML = "<p>Error retrieving data.</p>";
-    }
-}
-
-
-
-// script.js
-const countries = {
-  Kenya: { currency: "KES", continent: "Africa", population: "55M", flag: "🇰🇪" },
-  "South Sudan": { currency: "SSP", continent: "Africa", population: "11M", flag: "🇸🇸" },
-  USA: { currency: "USD", continent: "North America", population: "331M", flag: "🇺🇸" }
-};
-
-function searchCountry() {
-  const name = document.getElementById("countryInput").value;
-  const info = countries[name];
-  if(info){
-    document.getElementById("result").innerHTML = `
-      <p>Currency: ${info.currency}</p>
-      <p>Continent: ${info.continent}</p>
-      <p>Population: ${info.population}</p>
-      <p>Flag: ${info.flag}</p>
-    `;
-  } else {
-    document.getElementById("result").innerHTML = "<p>Country not found!</p>";
-  }
-}
-
-function toggleDark() {
-  document.body.classList.toggle("dark-mode");
-}
-
-
+<!-- Link external JS -->
+<script src="script.js" defer></script>
 </body>
 </html>
