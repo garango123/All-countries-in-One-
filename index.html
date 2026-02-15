@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Country Information Finder</title>
-    <style>
+    
         body {
             font-family: Arial, sans-serif;
             padding: 30px;
@@ -41,7 +41,7 @@
             margin-bottom: 20px;
             font-weight: bold;
         }
-    </style>
+   
 
 // script.js
 const countries = {
@@ -80,7 +80,7 @@ function toggleDark() {
     <div id="result"></div>
 </div>
 
-<script>
+
 async function searchCountry() {
     const country = document.getElementById("countryInput").value.trim();
 
@@ -128,7 +128,7 @@ async function searchCountry() {
         resultDiv.innerHTML = "<p>Error retrieving data.</p>";
     }
 }
-</script>
+
 
 
 // script.js
